@@ -16,6 +16,8 @@ class Student(BaseModel):
 
 
 app=FastAPI()
+
+
 # if your frontend domain is known, replace "*" with the actual origin
 app.add_middleware(
     CORSMiddleware,
@@ -60,4 +62,4 @@ def GetStudentRegistration(studentid:str,email:str):
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8080))
-    uvicorn.run(app, host="0.0.0.0", port=port)
+    uvicorn.run("app.main:app", host="0.0.0.0", port=port, reload=False)
