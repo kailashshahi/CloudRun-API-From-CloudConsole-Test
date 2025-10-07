@@ -56,4 +56,4 @@ def GetStudentRegistration(studentid:str,email:str):
         return output
     except Exception as e:
         return {"ERROR":e}
-    
+
