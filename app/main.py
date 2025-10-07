@@ -24,7 +24,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-path=os.path.join(os.getcwd(),"Database/student.json")
+
 
 data=[{
         "id":"101",
@@ -57,60 +57,3 @@ def GetStudentRegistration(studentid:str,email:str):
     except Exception as e:
         return {"ERROR":e}
     
-@app.get("/registration")
-def GetStudentRegistration(): 
-        data=ReadDBFromJson() 
-        output={"message":"success","statuscode":200,"data":data}  
-        return output
-   
-    
-    
-@app.post("/registration")
-def StudentRegistration(student:Student):#variable : type (which type the data is int str or class)
-    data=ReadDBFromJson()
-    data.append(student.__dict__)
-    WriteJsonInDB(data)
-    return {"message":"Student Record Created Successfully","statuscode":200} 
-
-@app.put("/registration/{studentid}")
-def UpdateStudentData(studentid:str,student:Student):  
-    data=ReadDBFromJson()
-    for s in data:
-        if s["id"]==studentid and student.id==studentid:# match both the ID because some time query string value could be change.
-            s.update(student.__dict__)
-            #s["name"]=student.name so on
-    WriteJsonInDB(data)
-    output={"message":"success","statuscode":200,"Data":data}       
-    return output
-            
-    
-    
-
-@app.delete("/registration/{studentid}") #you can use email as well
-
-def DeleteStudentData(studentid:str):  
-    data=ReadDBFromJson()
-    for s in data:
-        if s["id"]==studentid:# match both the ID because some time query string value could be change
-            data.remove(s) #remove the dictionary from Listdata
-            #s["name"]=student.name so on
-    WriteJsonInDB(data)
-    output={"message":"success","statuscode":200,"Data":data}       
-    return output
-
-
-def ReadDBFromJson():
-    
-    if os.path.exists(path):
-        with open(path,'r') as file:
-            data=json.load(file)
-            return data
-    else:
-        with open(path,'w') as file:
-            file.write("[]")
-            
-            
-def WriteJsonInDB(jsondata):
-    with open(path,'w') as file:
-        json.dump(jsondata,file,indent=2)
-         
