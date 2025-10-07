@@ -12,4 +12,4 @@ COPY . .
 
 # ENV PORT 8080  #due to some error i comment this in this repo
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", $PORT, "--workers", "1"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", $PORT, "--workers", "1"]
