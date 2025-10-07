@@ -4,6 +4,7 @@ from typing import Type
 import json
 import os
 from fastapi.middleware.cors import CORSMiddleware
+import uvicorn
 
 
 class Student(BaseModel):
@@ -57,3 +58,6 @@ def GetStudentRegistration(studentid:str,email:str):
     except Exception as e:
         return {"ERROR":e}
 
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8080))
+    uvicorn.run(app, host="0.0.0.0", port=port)
