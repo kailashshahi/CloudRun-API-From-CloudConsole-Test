@@ -21,7 +21,7 @@ app=FastAPI()
 # if your frontend domain is known, replace "*" with the actual origin
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["https://www.google.com"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
